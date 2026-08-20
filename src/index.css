@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Brand / Primary colors */
+  --color-primary: #1d4ed8; /* blue-700 */
+  --color-primary-hover: #1e40af; /* blue-800 */
+  --color-primary-light: #eff6ff; /* blue-50 */
+  --color-primary-border: #bfdbfe; /* blue-200 */
+
+  /* Neutral Dark colors (Buttons & Accents) */
+  --color-surface-dark: #1e293b; /* slate-800 */
+  --color-surface-dark-item: #334155; /* slate-700 */
+  --color-surface-dark-border: #334155; /* slate-700 */
+  --color-surface-dark-border-subtle: #475569; /* slate-600 */
+}
+
+body {
+  background-color: #ffffff;
+  color: #0f172a;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+html.dark body {
+  background-color: #111827; /* Gray-900 Terminal Dark Canvas */
+  color: #f9fafb;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  display: flex;
+  width: max-content;
+  animation: scroll 10s linear infinite;
+}
+
+/* Custom terminal scrollbar */
+.terminal-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #6b7280 rgba(31, 41, 55, 0.6);
+}
+
+.terminal-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.6);
+  border-radius: 4px;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-thumb {
+  background: #6b7280;
+  border-radius: 4px;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
