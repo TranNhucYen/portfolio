@@ -1,16 +1,20 @@
-import { Navbar } from '../components/Navbar';
-import { Terminal } from '../components/Terminal';
-import { Project } from '../components/Project';
+import {
+  About,
+  Contact,
+  Navbar,
+  Project,
+  Skills,
+  Terminal,
+} from '../components';
 import { introText } from '../data/homeData';
+
+// Tech stack assets
 import jsImg from '../assets/js.png';
 import tsImg from '../assets/ts.png';
 import reactImg from '../assets/react.svg';
 import nextjsImg from '../assets/nextjs.png';
 import nestjsImg from '../assets/nestjs.png';
 import mongodbImg from '../assets/mongodb.png';
-import { About } from '../components/About';
-import { Contact } from '../components/Contact';
-import { Skills } from '../components/Skills';
 
 const techStack = [jsImg, tsImg, reactImg, nextjsImg, nestjsImg, mongodbImg];
 
