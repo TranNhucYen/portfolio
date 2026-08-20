@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';
 
+
 const navLinks = [
   { label: 'Home', href: '#' },
   { label: 'About', href: '#about' },
@@ -10,6 +11,8 @@ const navLinks = [
 ];
 
 export function Navbar() {
+  const [activeSection, setActiveSection] = useState('#');
+
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
@@ -29,6 +32,35 @@ export function Navbar() {
     }
   }, [isDark]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
+
+      if (window.scrollY < 150) {
+        setActiveSection('#');
+        return;
+      }
+
+      const sectionIds = ['contact', 'skills', 'projects', 'about'];
+
+      for (const id of sectionIds) {
+        const element = document.getElementById(id);
+        if (element) {
+          const top = element.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveSection(`#${id}`);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="sticky top-4 z-50 mx-4 lg:mx-auto max-w-7xl">
       <header className="rounded-2xl border border-slate-200/60 dark:border-gray-700/80 bg-white/60 dark:bg-gray-800/80 backdrop-blur-md shadow-xs transition-all duration-300 hover:bg-white/80 dark:hover:bg-gray-800/95">
@@ -44,16 +76,24 @@ export function Navbar() {
 
           <div className="flex items-center gap-6 sm:gap-8">
             <ul className="items-center gap-6 sm:gap-8 flex">
-              {navLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm font-medium text-slate-600 dark:text-gray-300 transition-colors duration-200 hover:text-slate-900 dark:hover:text-white"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href;
+                return (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      onClick={() => setActiveSection(link.href)}
+                      className={`text-sm transition-colors duration-200 ${
+                        isActive
+                          ? 'text-slate-900 dark:text-blue-400 font-semibold'
+                          : 'text-slate-500 dark:text-gray-400 font-medium hover:text-slate-900 dark:hover:text-white'
+                      }`}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
 
             {/* Dark Mode Toggle Button */}
