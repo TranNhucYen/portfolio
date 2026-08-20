@@ -213,6 +213,14 @@ export function useTerminal() {
 
       case 'cat': {
         // Read file content
+        if (parts.length > 2) {
+          newHistory.push({
+            type: 'output',
+            text: 'cat: too many arguments',
+          });
+          break;
+        }
+
         if (!target) {
           newHistory.push({
             type: 'output',
@@ -284,7 +292,12 @@ export function useTerminal() {
       }
 
       case 'node': {
-        if (!target) {
+        if (parts.length > 2) {
+          newHistory.push({
+            type: 'output',
+            text: 'node: too many arguments',
+          });
+        } else if (!target) {
           newHistory.push({
             type: 'output',
             text: 'node: missing operand',
