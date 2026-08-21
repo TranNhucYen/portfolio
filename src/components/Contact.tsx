@@ -24,7 +24,7 @@ const contactDetails = [
       <FiMail className="w-5 h-5 sm:w-6 sm:h-6 text-primary dark:text-blue-400" />
     ),
     label: 'Email',
-    value: 'yentran@example.com',
+    value: 'trannhucyendev@gmail.com',
     breakClass: 'break-all',
   },
 ];

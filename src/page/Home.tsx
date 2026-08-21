@@ -23,10 +23,11 @@ export default function Home() {
     <div className="max-w-7xl mx-auto">
       <Navbar />
       <main className="pt-24 pb-12 px-4">
-        {/* introduction and terminal */}
-        <div className="flex items-stretch">
-          <div className="w-1/2 pr-6">
-            <h1 className="text-7xl font-bold pb-6 -ml-1 text-slate-900 dark:text-white">
+        {/* Hero Section Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 lg:gap-y-18 lg:gap-x-12 items-stretch">
+          {/* 1. Introduce */}
+          <div className="lg:col-start-1 lg:row-start-1 flex flex-col justify-center">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold pb-6 -ml-1 text-slate-900 dark:text-white">
               Hello, I'm Yen
             </h1>
             <p className="text-xl pb-2 font-semibold text-slate-800 dark:text-blue-400">
@@ -36,31 +37,25 @@ export default function Home() {
               {introText}
             </p>
           </div>
-          <div className="w-1/2 ml-6 relative">
-            <div className="absolute inset-0">
-              <Terminal />
-            </div>
-          </div>
-        </div>
-        {/* watch project button and watch contact button */}
-        <div className="flex pt-18">
-          <div className="w-1/2 px-4 flex gap-6 justify-center items-center">
+
+          {/* 2. Buttons */}
+          <div className="lg:col-start-1 lg:row-start-2 flex flex-wrap sm:flex-nowrap gap-4 sm:gap-6 justify-center items-center">
             <a
               href="#projects"
-              className="bg-surface-dark hover:bg-slate-900 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-semibold min-w-[185px] py-4 px-8 rounded-xl shadow-md hover:-translate-y-0.5 transition-all duration-200 inline-block text-center cursor-pointer"
+              className="w-full sm:w-auto bg-surface-dark hover:bg-slate-900 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-semibold min-w-[185px] py-4 px-8 rounded-xl shadow-md hover:-translate-y-0.5 transition-all duration-200 inline-block text-center cursor-pointer"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="border border-slate-300 dark:border-gray-700 text-slate-800 dark:text-gray-200 hover:border-slate-400 dark:hover:border-gray-600 hover:bg-slate-50 dark:hover:bg-gray-800/80 font-semibold min-w-[185px] py-4 px-8 rounded-xl shadow-xs hover:-translate-y-0.5 transition-all duration-200 inline-block text-center cursor-pointer"
+              className="w-full sm:w-auto border border-slate-300 dark:border-gray-700 text-slate-800 dark:text-gray-200 hover:border-slate-400 dark:hover:border-gray-600 hover:bg-slate-50 dark:hover:bg-gray-800/80 font-semibold min-w-[185px] py-4 px-8 rounded-xl shadow-xs hover:-translate-y-0.5 transition-all duration-200 inline-block text-center cursor-pointer"
             >
               Contact Me
             </a>
           </div>
 
-          {/* list tech stack */}
-          <div className="w-1/2 ml-6 min-w-0 overflow-hidden relative">
+          {/* 3. list tech stack */}
+          <div className="lg:col-start-2 lg:row-start-2 min-w-0 overflow-hidden relative">
             <div className="absolute inset-y-0 left-0 w-8 bg-linear-to-r from-white dark:from-[#111827] to-transparent z-10 pointer-events-none"></div>
             <div className="absolute inset-y-0 right-0 w-8 bg-linear-to-l from-white dark:from-[#111827] to-transparent z-10 pointer-events-none"></div>
             <div className="flex">
@@ -97,6 +92,13 @@ export default function Home() {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* 4. Terminal */}
+          <div className="lg:col-start-2 lg:row-start-1 relative h-[360px] sm:h-[400px] lg:h-full min-h-[300px]">
+            <div className="absolute inset-0">
+              <Terminal />
             </div>
           </div>
         </div>
