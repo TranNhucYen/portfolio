@@ -15,9 +15,14 @@ export function Navbar() {
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
-      if (saved) return saved === 'dark';
+
+      if (saved) {
+        return saved === 'dark';
+      }
+
       return window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
+
     return false;
   });
 
@@ -59,107 +64,48 @@ export function Navbar() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
     <div className="sticky top-4 z-50 mx-2 sm:mx-4 lg:mx-auto max-w-7xl">
       <header
         className="
-          relative
-          rounded-2xl
-          border border-slate-200/60 dark:border-gray-700/80
-          bg-white/60 dark:bg-gray-800/80
-          backdrop-blur-md
-          shadow-xs
-          transition-all duration-300
-          hover:bg-white/80 dark:hover:bg-gray-800/95
-        "
+          relative rounded-2xl border border-slate-200/60 dark:border-gray-700/80 bg-white/60 dark:bg-gray-800/80 
+          backdrop-blur-md shadow-xs transition-all duration-300 hover:bg-white/80 dark:hover:bg-gray-800/95"
       >
-        <nav
-          className="
-            flex
-            h-16
-            items-center
-            justify-between
-            px-2
-            sm:px-4
-            lg:px-8
-          "
-        >
-          {/* Logo - ẩn hoàn toàn trên mobile */}
-          <a
-            href="#"
-            className="hidden sm:flex items-center gap-2.5 shrink-0"
-          >
+        <nav className="flex h-16 items-center px-2 sm:px-4 lg:px-8">
+          {/* Logo */}
+          <a href="#" className="hidden sm:flex shrink-0 items-center gap-2.5">
             <span
               className="
-                inline-flex
-                h-8 w-8
-                items-center justify-center
-                rounded-lg
-                bg-slate-900 dark:bg-blue-600
-                text-sm font-bold text-white
-                shadow-xs
-              "
-            >
+              inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 dark:bg-blue-600 
+              text-sm font-bold text-white shadow-xs">
               Y
             </span>
 
-            <span
-              className="
-                hidden lg:block
-                text-base font-semibold tracking-tight
-                text-slate-900 dark:text-gray-100
-              "
-            >
+            <span className="hidden lg:block text-base font-semibold tracking-tight text-slate-900 dark:text-gray-100">
               Yen Portfolio
             </span>
           </a>
 
-          {/* Navigation + Dark Mode */}
-          <div
-            className="
-              flex
-              items-center
-              ml-auto
-              w-full
-              sm:w-auto
-            "
-          >
-            <ul
-              className="
-                flex
-                w-full
-                items-center
-                justify-between
-                gap-0
-                sm:gap-5
-                md:gap-6
-                lg:gap-8
-              "
-            >
+          {/* Navigation */}
+          <div className="ml-auto flex w-full sm:w-auto items-center">
+            <ul className="flex w-full items-center justify-between gap-0 sm:gap-5 md:gap-6 lg:gap-8">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href;
 
                 return (
-                  <li
-                    key={link.label}
-                    className="shrink-0"
-                  >
+                  <li key={link.label} className="shrink-0">
                     <a
                       href={link.href}
                       onClick={() => setActiveSection(link.href)}
-                      className={`
-                        text-sm
-                        whitespace-nowrap
-                        transition-colors duration-200
-                        ${
-                          isActive
-                            ? 'text-slate-900 dark:text-blue-400 font-semibold'
-                            : 'text-slate-500 dark:text-gray-400 font-medium hover:text-slate-900 dark:hover:text-white'
-                        }
-                      `}
+                      className={`text-sm whitespace-nowrap transition-colors duration-200 ${isActive
+                        ? 'font-semibold text-slate-900 dark:text-blue-400'
+                        : 'font-medium text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white'
+                        }`}
                     >
                       {link.label}
                     </a>
@@ -168,62 +114,24 @@ export function Navbar() {
               })}
             </ul>
 
-            {/* Dark Mode */}
+            {/* Theme Toggle - chỉ có một button */}
             <button
-              onClick={() => setIsDark(!isDark)}
+              onClick={() => setIsDark((prev) => !prev)}
               aria-label="Toggle Dark Mode"
               className="
-                ml-2
-                sm:ml-4
-                md:ml-5
-                lg:ml-6
-                shrink-0
-                w-9 h-9
-                rounded-xl
-                flex items-center justify-center
-                text-slate-600 dark:text-gray-300
-                hover:text-slate-900 dark:hover:text-white
-                bg-slate-100/80 dark:bg-gray-700/80
-                border border-slate-200 dark:border-gray-600/80
-                transition-all duration-200
-                cursor-pointer
-              "
+                relative z-10 ml-2 sm:ml-4 md:ml-5 lg:ml-6 flex h-9 w-9 shrink-0 items-center justify-center 
+                rounded-xl border border-slate-200 bg-slate-100/80 text-slate-600 transition-all duration-200 hover:text-slate-900 
+                dark:border-gray-600/80 dark:bg-gray-700/80 dark:text-gray-300 dark:hover:text-white cursor-pointer 
+                max-[380px]:absolute max-[380px]:bottom-1 max-[380px]:right-1 max-[380px]:ml-0 max-[380px]:h-7 max-[380px]:w-7"
             >
               {isDark ? (
-                <FiSun className="w-4 h-4 text-amber-400" />
+                <FiSun className="h-4 w-4 text-amber-400 max-[380px]:h-3.5 max-[380px]:w-3.5" />
               ) : (
-                <FiMoon className="w-4 h-4 text-slate-700" />
+                <FiMoon className="h-4 w-4 text-slate-700 max-[380px]:h-3.5 max-[380px]:w-3.5" />
               )}
             </button>
           </div>
         </nav>
-
-        {/* Dark mode chuyển xuống góc dưới bên phải
-            khi màn hình cực hẹp */}
-        <button
-          onClick={() => setIsDark(!isDark)}
-          aria-label="Toggle Dark Mode"
-          className="
-            hidden
-            max-[380px]:flex
-            absolute
-            right-1
-            bottom-1
-            w-7 h-7
-            items-center justify-center
-            rounded-lg
-            bg-slate-100/90 dark:bg-gray-700/90
-            border border-slate-200 dark:border-gray-600
-            text-slate-600 dark:text-gray-300
-            cursor-pointer
-          "
-        >
-          {isDark ? (
-            <FiSun className="w-3.5 h-3.5 text-amber-400" />
-          ) : (
-            <FiMoon className="w-3.5 h-3.5 text-slate-700" />
-          )}
-        </button>
       </header>
     </div>
   );
