@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';
 
-
 const navLinks = [
   { label: 'Home', href: '#' },
   { label: 'About', href: '#about' },
@@ -45,8 +44,10 @@ export function Navbar() {
 
       for (const id of sectionIds) {
         const element = document.getElementById(id);
+
         if (element) {
           const top = element.offsetTop;
+
           if (scrollPosition >= top) {
             setActiveSection(`#${id}`);
             break;
@@ -62,32 +63,103 @@ export function Navbar() {
   }, []);
 
   return (
-    <div className="sticky top-4 z-50 mx-4 lg:mx-auto max-w-7xl">
-      <header className="rounded-2xl border border-slate-200/60 dark:border-gray-700/80 bg-white/60 dark:bg-gray-800/80 backdrop-blur-md shadow-xs transition-all duration-300 hover:bg-white/80 dark:hover:bg-gray-800/95">
-        <nav className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-          <a href="#" className="flex items-center gap-2.5">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 dark:bg-blue-600 text-sm font-bold text-white shadow-xs">
-              <span>Y</span>
+    <div className="sticky top-4 z-50 mx-2 sm:mx-4 lg:mx-auto max-w-7xl">
+      <header
+        className="
+          relative
+          rounded-2xl
+          border border-slate-200/60 dark:border-gray-700/80
+          bg-white/60 dark:bg-gray-800/80
+          backdrop-blur-md
+          shadow-xs
+          transition-all duration-300
+          hover:bg-white/80 dark:hover:bg-gray-800/95
+        "
+      >
+        <nav
+          className="
+            flex
+            h-16
+            items-center
+            justify-between
+            px-2
+            sm:px-4
+            lg:px-8
+          "
+        >
+          {/* Logo - ẩn hoàn toàn trên mobile */}
+          <a
+            href="#"
+            className="hidden sm:flex items-center gap-2.5 shrink-0"
+          >
+            <span
+              className="
+                inline-flex
+                h-8 w-8
+                items-center justify-center
+                rounded-lg
+                bg-slate-900 dark:bg-blue-600
+                text-sm font-bold text-white
+                shadow-xs
+              "
+            >
+              Y
             </span>
-            <span className="lg:block hidden text-base font-semibold tracking-tight text-slate-900 dark:text-gray-100">
+
+            <span
+              className="
+                hidden lg:block
+                text-base font-semibold tracking-tight
+                text-slate-900 dark:text-gray-100
+              "
+            >
               Yen Portfolio
             </span>
           </a>
 
-          <div className="flex items-center gap-6 sm:gap-8">
-            <ul className="items-center gap-6 sm:gap-8 flex">
+          {/* Navigation + Dark Mode */}
+          <div
+            className="
+              flex
+              items-center
+              ml-auto
+              w-full
+              sm:w-auto
+            "
+          >
+            <ul
+              className="
+                flex
+                w-full
+                items-center
+                justify-between
+                gap-0
+                sm:gap-5
+                md:gap-6
+                lg:gap-8
+              "
+            >
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href;
+
                 return (
-                  <li key={link.label}>
+                  <li
+                    key={link.label}
+                    className="shrink-0"
+                  >
                     <a
                       href={link.href}
                       onClick={() => setActiveSection(link.href)}
-                      className={`text-sm transition-colors duration-200 ${
-                        isActive
-                          ? 'text-slate-900 dark:text-blue-400 font-semibold'
-                          : 'text-slate-500 dark:text-gray-400 font-medium hover:text-slate-900 dark:hover:text-white'
-                      }`}
+                      className={`
+                        text-sm
+                        whitespace-nowrap
+                        transition-colors duration-200
+                        ${
+                          isActive
+                            ? 'text-slate-900 dark:text-blue-400 font-semibold'
+                            : 'text-slate-500 dark:text-gray-400 font-medium hover:text-slate-900 dark:hover:text-white'
+                        }
+                      `}
                     >
                       {link.label}
                     </a>
@@ -96,11 +168,26 @@ export function Navbar() {
               })}
             </ul>
 
-            {/* Dark Mode Toggle Button */}
+            {/* Dark Mode */}
             <button
               onClick={() => setIsDark(!isDark)}
               aria-label="Toggle Dark Mode"
-              className="w-9 h-9 rounded-xl flex items-center justify-center text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white bg-slate-100/80 dark:bg-gray-700/80 border border-slate-200 dark:border-gray-600/80 transition-all duration-200 cursor-pointer"
+              className="
+                ml-2
+                sm:ml-4
+                md:ml-5
+                lg:ml-6
+                shrink-0
+                w-9 h-9
+                rounded-xl
+                flex items-center justify-center
+                text-slate-600 dark:text-gray-300
+                hover:text-slate-900 dark:hover:text-white
+                bg-slate-100/80 dark:bg-gray-700/80
+                border border-slate-200 dark:border-gray-600/80
+                transition-all duration-200
+                cursor-pointer
+              "
             >
               {isDark ? (
                 <FiSun className="w-4 h-4 text-amber-400" />
@@ -110,6 +197,33 @@ export function Navbar() {
             </button>
           </div>
         </nav>
+
+        {/* Dark mode chuyển xuống góc dưới bên phải
+            khi màn hình cực hẹp */}
+        <button
+          onClick={() => setIsDark(!isDark)}
+          aria-label="Toggle Dark Mode"
+          className="
+            hidden
+            max-[380px]:flex
+            absolute
+            right-1
+            bottom-1
+            w-7 h-7
+            items-center justify-center
+            rounded-lg
+            bg-slate-100/90 dark:bg-gray-700/90
+            border border-slate-200 dark:border-gray-600
+            text-slate-600 dark:text-gray-300
+            cursor-pointer
+          "
+        >
+          {isDark ? (
+            <FiSun className="w-3.5 h-3.5 text-amber-400" />
+          ) : (
+            <FiMoon className="w-3.5 h-3.5 text-slate-700" />
+          )}
+        </button>
       </header>
     </div>
   );
