@@ -2,6 +2,8 @@ export interface ProjectItem {
   title: string;
   description: string;
   tags: string[];
+  githubUrl?: string;
+  demoUrl?: string;
 }
 
 export const introText = `Hello, I'm Yen. I build web applications, tools, and software to solve problems and make things easier to use. I enjoy working with new technologies, figuring out how things work, and turning ideas into working products. Most of my work is focused on the web, but I'm also interested in exploring different areas of software development and building things that are useful.`;
@@ -14,10 +16,11 @@ export const projects: ProjectItem[] = [
     tags: ['React', 'Node.js', 'MongoDB'],
   },
   {
-    title: 'Terminal Portfolio',
+    title: 'Drag & Drop Form Builder',
     description:
-      'A personal portfolio website to showcase my skills and projects. Built with React and Tailwind CSS featuring a unique interactive terminal interface.',
-    tags: ['React', 'Tailwind', 'TypeScript'],
+      'An interactive drag-and-drop form builder built with Next.js, @dnd-kit, and shadcn/ui. Features customizable form components, template library, and form sharing capabilities.',
+    tags: ['Next.js', '@dnd-kit', 'shadcn/ui', 'TypeScript'],
+    githubUrl: 'https://github.com/TranNhucYen/dnd-form',
   },
   {
     title: 'Task Manager App',

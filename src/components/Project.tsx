@@ -47,12 +47,41 @@ export function Project() {
 
             {/* Action buttons */}
             <div className="flex gap-3">
-              <button className="flex-1 py-2.5 bg-surface-dark dark:bg-blue-600 dark:hover:bg-blue-500 text-white rounded-xl text-sm font-semibold hover:bg-slate-900 transition-colors shadow-sm cursor-pointer">
-                Live Demo
-              </button>
-              <button className="flex-1 py-2.5 bg-white dark:bg-gray-700 text-slate-800 dark:text-gray-200 border border-slate-200 dark:border-gray-600 rounded-xl text-sm font-semibold hover:bg-slate-50 dark:hover:bg-gray-600 transition-colors shadow-xs cursor-pointer">
-                Source Code
-              </button>
+              {project.demoUrl ? (
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 text-center py-2.5 bg-surface-dark dark:bg-blue-600 dark:hover:bg-blue-500 text-white rounded-xl text-sm font-semibold hover:bg-slate-900 transition-colors shadow-sm cursor-pointer"
+                >
+                  Live Demo
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  className="flex-1 py-2.5 bg-surface-dark dark:bg-blue-600 dark:hover:bg-blue-500 text-white rounded-xl text-sm font-semibold hover:bg-slate-900 transition-colors shadow-sm cursor-pointer"
+                >
+                  Live Demo
+                </button>
+              )}
+
+              {project.githubUrl ? (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 text-center py-2.5 bg-white dark:bg-gray-700 text-slate-800 dark:text-gray-200 border border-slate-200 dark:border-gray-600 rounded-xl text-sm font-semibold hover:bg-slate-50 dark:hover:bg-gray-600 transition-colors shadow-xs cursor-pointer"
+                >
+                  Source Code
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  className="flex-1 py-2.5 bg-white dark:bg-gray-700 text-slate-800 dark:text-gray-200 border border-slate-200 dark:border-gray-600 rounded-xl text-sm font-semibold hover:bg-slate-50 dark:hover:bg-gray-600 transition-colors shadow-xs cursor-pointer"
+                >
+                  Source Code
+                </button>
+              )}
             </div>
           </div>
         ))}
